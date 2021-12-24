@@ -37,17 +37,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDetail(data: Drink) {
+        val drink = Drink(
+            data.name,
+            data.price,
+            data.tagline,
+            data.image,
+            data.detail,
+            data.logo,
+            data.perusahaan,
+            data.komposisi,
+            data.produk,
+            data.url
+        )
+
         intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.EXTRA_NAME, data.name)
-        intent.putExtra(DetailActivity.EXTRA_HARGA, data.price)
-        intent.putExtra(DetailActivity.EXTRA_IMG, data.image)
-        intent.putExtra(DetailActivity.EXTRA_TAG, data.tagline)
-        intent.putExtra(DetailActivity.EXTRA_DETAIL, data.detail)
-        intent.putExtra(DetailActivity.EXTRA_LOGO, data.logo)
-        intent.putExtra(DetailActivity.EXTRA_PERUSAHAAN, data.perusahaan)
-        intent.putExtra(DetailActivity.EXTRA_KOMPOSISI, data.komposisi)
-        intent.putExtra(DetailActivity.EXTRA_PRODUK, data.produk)
-        intent.putExtra(DetailActivity.EXTRA_URL, data.url)
+        intent.putExtra(DetailActivity.EXTRA_DRINK, drink)
         startActivity(intent)
     }
 

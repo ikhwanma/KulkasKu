@@ -23,18 +23,10 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvProduk:TextView
     private lateinit var btnWebsite:Button
     private lateinit var btnShare:Button
+    private var url = ""
 
     companion object{
-        const val EXTRA_NAME = "extra_name"
-        const val EXTRA_HARGA = "extra_harga"
-        const val EXTRA_IMG = "extra_img"
-        const val EXTRA_TAG = "extra_tag"
-        const val EXTRA_DETAIL = "extra_detail"
-        const val EXTRA_LOGO = "extra_logo"
-        const val EXTRA_PERUSAHAAN = "extra_perusahaan"
-        const val EXTRA_KOMPOSISI = "extra_komposisi"
-        const val EXTRA_PRODUK = "extra_produk"
-        const val EXTRA_URL = "extra_url"
+        const val EXTRA_DRINK = "extra_drink"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,13 +44,16 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         btnWebsite = findViewById(R.id.btn_website)
         btnShare = findViewById(R.id.btn_share)
 
+        val data = intent.getParcelableExtra<Drink>(EXTRA_DRINK) as Drink
+        url = data.url!!
+
         btnWebsite.setOnClickListener(this)
         btnShare.setOnClickListener(this)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        getDataIntent()
+        getDataIntent(data)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -71,7 +66,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        val url = intent.getStringExtra(EXTRA_URL)
         when (v?.id) {
             R.id.btn_website -> {
                 startActivity(Intent(Intent.ACTION_VIEW , Uri.parse(url)))
@@ -89,19 +83,19 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun getDataIntent() {
-        val name = intent.getStringExtra(EXTRA_NAME)
-        val price = intent.getStringExtra(EXTRA_HARGA)
-        val image = intent.getIntExtra(EXTRA_IMG, 0)
-        val tag = intent.getStringExtra(EXTRA_TAG)
-        val detail = intent.getStringExtra(EXTRA_DETAIL)
-        val logo = intent.getIntExtra(EXTRA_LOGO, 0)
-        val perusahaan = intent.getStringExtra(EXTRA_PERUSAHAAN)
-        val komposisi = intent.getStringExtra(EXTRA_KOMPOSISI)
-        val produk = intent.getStringExtra(EXTRA_PRODUK)
-
-        supportActionBar?.title = name
-        setView(name,price,image,tag,detail,logo,perusahaan,komposisi,produk)
+    private fun getDataIntent(drink:Drink) {
+        supportActionBar?.title = drink.name
+        setView(
+            drink.name,
+            drink.price,
+            drink.image,
+            drink.tagline,
+            drink.detail,
+            drink.logo,
+            drink.perusahaan,
+            drink.komposisi,
+            drink.produk
+        )
     }
 
     @SuppressLint("SetTextI18n")

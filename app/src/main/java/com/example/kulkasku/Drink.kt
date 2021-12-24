@@ -1,5 +1,9 @@
 package com.example.kulkasku
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Drink(
     var name: String? = null,
     var price: String? = null,
@@ -11,4 +15,4 @@ data class Drink(
     var komposisi: String? = null,
     var produk: String? = null,
     var url: String? = null
-)
+): Parcelable
