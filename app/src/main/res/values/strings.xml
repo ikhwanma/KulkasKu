@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">KulkasKu</string>
+    <string name="nama_minuman">Nama Minuman</string>
+    <string name="harga_minuman">Harga Minuman</string>
+    <string name="tagline_minuman">Tagline Minuman</string>
+    <string name="detail_minuman">Detail Minuman</string>
+    <string name="nama_perusahaan">Nama Perusahaan</string>
+    <string name="about_me">About Me</string>
+    <string name="ikhwan_maulana_akbar">Ikhwan Maulana Akbar</string>
+    <string name="ikhwan749_gmail_com">ikhwan749@gmail.com</string>
+    <string name="komposisi">Komposisi</string>
+    <string name="contoh_detail">Contoh Detail</string>
+    <string name="produk">Produk</string>
+    <string name="contoh_komposisi">Contoh Komposisi</string>
+    <string name="contoh_produk">Contoh Produk</string>
+    <string name="kunjungi_website">Kunjungi Website</string>
+    <string name="kulkasku">KulkasKu</string>
+
+</resources>
