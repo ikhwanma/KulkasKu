@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.kulkasku.databinding.ItemListDrinkBinding
 
 class DrinkAdapter(private val listDrink: ArrayList<Drink>) : RecyclerView.Adapter<DrinkAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
@@ -18,17 +19,17 @@ class DrinkAdapter(private val listDrink: ArrayList<Drink>) : RecyclerView.Adapt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_list_drink, parent, false)
-        return ListViewHolder(view)
+        val binding = ItemListDrinkBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return ListViewHolder(binding)
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val drink = listDrink[position]
-        Glide.with(holder.itemView.context).load(drink.image).into(holder.imgDrink)
-        holder.tvName.text = drink.name
-        holder.tvPrice.text = "Rp ${drink.price}"
-        holder.tvTag.text = "\"${drink.tagline}\""
+        Glide.with(holder.itemView.context).load(drink.image).into(holder.binding.imgDrink)
+        holder.binding.tvNamaMinuman.text = drink.name
+        holder.binding.tvHargaMinuman.text = "Rp ${drink.price}"
+        holder.binding.tvTagMinuman.text = "\"${drink.tagline}\""
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(listDrink[holder.adapterPosition])
         }
@@ -38,12 +39,7 @@ class DrinkAdapter(private val listDrink: ArrayList<Drink>) : RecyclerView.Adapt
         return listDrink.size
     }
 
-    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvName: TextView = itemView.findViewById(R.id.tv_nama_minuman)
-        var tvPrice: TextView = itemView.findViewById(R.id.tv_harga_minuman)
-        var tvTag: TextView = itemView.findViewById(R.id.tv_tag_minuman)
-        var imgDrink: ImageView = itemView.findViewById(R.id.img_drink)
-    }
+    inner class ListViewHolder(var binding: ItemListDrinkBinding) : RecyclerView.ViewHolder(binding.root)
 
     interface OnItemClickCallback {
         fun onItemClicked(data: Drink)

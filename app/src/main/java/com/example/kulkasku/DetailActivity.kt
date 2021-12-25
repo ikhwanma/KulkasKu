@@ -10,20 +10,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.example.kulkasku.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var imgDrink:ImageView
-    private lateinit var imgLogo:ImageView
-    private lateinit var tvNama:TextView
-    private lateinit var tvHarga:TextView
-    private lateinit var tvTagline:TextView
-    private lateinit var tvDetail:TextView
-    private lateinit var tvPerusahaan:TextView
-    private lateinit var tvKomposisi:TextView
-    private lateinit var tvProduk:TextView
-    private lateinit var btnWebsite:Button
-    private lateinit var btnShare:Button
     private var url = ""
+    private lateinit var binding: ActivityDetailBinding
 
     companion object{
         const val EXTRA_DRINK = "extra_drink"
@@ -31,24 +22,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
-        imgDrink = findViewById(R.id.img_drink)
-        imgLogo = findViewById(R.id.img_logo)
-        tvNama = findViewById(R.id.tv_nama_minuman)
-        tvHarga = findViewById(R.id.tv_harga_minuman)
-        tvTagline = findViewById(R.id.tv_tag_minuman)
-        tvDetail = findViewById(R.id.tv_detail_minuman)
-        tvPerusahaan = findViewById(R.id.tv_nama_perusahaan)
-        tvKomposisi = findViewById(R.id.tv_komposisi)
-        tvProduk = findViewById(R.id.tv_produk)
-        btnWebsite = findViewById(R.id.btn_website)
-        btnShare = findViewById(R.id.btn_share)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val data = intent.getParcelableExtra<Drink>(EXTRA_DRINK) as Drink
         url = data.url!!
 
-        btnWebsite.setOnClickListener(this)
-        btnShare.setOnClickListener(this)
+        binding.btnWebsite.setOnClickListener(this)
+        binding.btnShare.setOnClickListener(this)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -112,17 +93,17 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     ) {
         Glide.with(this)
             .load(image)
-            .into(imgDrink)
+            .into(binding.imgDrink)
         Glide.with(this)
             .load(logo)
-            .into(imgLogo)
-        tvNama.text = name
-        tvHarga.text = "Rp $price"
-        tvTagline.text = "\"$tag\""
-        tvDetail.text = detail
-        tvPerusahaan.text = perusahaan
-        tvKomposisi.text = komposisi
-        tvProduk.text = produk
+            .into(binding.imgLogo)
+        binding.tvNama.text = name
+        binding.tvHarga.text = "Rp $price"
+        binding.tvTagline.text = "\"$tag\""
+        binding.tvDetail.text = detail
+        binding.tvNamaPerusahaan.text = perusahaan
+        binding.tvKomposisi.text = komposisi
+        binding.tvProduk.text = produk
     }
 
 }

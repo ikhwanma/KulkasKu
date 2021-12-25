@@ -1,12 +1,14 @@
 package com.example.kulkasku
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -26,7 +28,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showRecycler() {
-        rvKulkas.layoutManager = LinearLayoutManager(this)
+        if(applicationContext.resources.configuration.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            rvKulkas.layoutManager = GridLayoutManager(this,2)
+        }else{
+            rvKulkas.layoutManager = LinearLayoutManager(this)
+        }
         val drinkAdapter = DrinkAdapter(list)
         rvKulkas.adapter = drinkAdapter
         drinkAdapter.setOnItemClickCallback(object :DrinkAdapter.OnItemClickCallback {
